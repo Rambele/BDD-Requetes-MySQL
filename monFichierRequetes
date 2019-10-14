@@ -1,1 +1,4 @@
 1-SELECT M.nom,M.prenom FROM malade M where M.mutuelle="MAAF";
+2-SELECT E.nom,E.prenom FROM employe E,infirmier I WHERE I.rotation='NUIT' and E.numero=I.numero ;
+3-SELECT S.nom,S.batiment,E.nom,E.prenom,D.specialite FROM service S,employe E,docteur D WHERE S.directeur=D.numero and D.numero=E.numero;
+
