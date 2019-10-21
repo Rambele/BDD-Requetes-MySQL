@@ -4,3 +4,8 @@
 4-SELECT H.lit,H.no_chambre,S.nom,M.nom,M.prenom,M.mutuelle FROM hospitalisation H,service S,malade M WHERE H.no_malade=M.numero and S.batiment='B' and S.code=H.code_service and M.mutuelle LIKE "MN%";
 5-SELECT S.code,AVG(I.salaire) as moy  FROM infirmier I,service S WHERE I.code_service=S.code GROUP BY S.code
 6-SELECT S.code,AVG(C.nb_lits) FROM service S,chambre C WHERE S.code=C.code_service and S.batiment='A' GROUP BY S.code;
+7-SELECT M.numero,M.nom,M.prenom,COUNT(DISTINCT D.numero) as nb_doct,COUNT(DISTINCT D.specialite) as nb_spec 
+FROM malade M,docteur D,soigne S 
+WHERE M.numero=S.no_malade and D.numero=S.no_docteur 
+GROUP BY M.numero,M.nom,M.prenom
+HAVING COUNT(DISTINCT D.numero)>3;
