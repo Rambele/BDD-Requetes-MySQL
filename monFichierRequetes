@@ -9,3 +9,11 @@ FROM malade M,docteur D,soigne S
 WHERE M.numero=S.no_malade and D.numero=S.no_docteur 
 GROUP BY M.numero,M.nom,M.prenom
 HAVING COUNT(DISTINCT D.numero)>3;
+9-SELECT DISTINCT E.nom,E.prenom
+FROM docteur D,malade M,soigne S,employe E
+WHERE D.numero=S.no_docteur
+and   M.numero=S.no_malade
+and   E.numero=D.numero
+and   EXISTS(SELECT * 
+             FROM hospitalisation h
+             WHERE h.no_malade=M.numero);
